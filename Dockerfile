@@ -5,20 +5,25 @@ RUN apk --no-cache add \
 	ghostscript \
   git \
   gnupg \
+  imagemagick \
+  make \
   perl \
   python \
   ruby \
   tar \
   wget \
-  xz
+  xz \
+  && rm -rf /usr/share/cmake/Help
 
 ENV PATH="/opt/texlive/texdir/bin/x86_64-linuxmusl:${PATH}"
 
-COPY texlive-setup /root/texlive-setup
+COPY setup /root/setup
 
-WORKDIR /root/texlive-setup
+WORKDIR /root/setup
 
-RUN /root/texlive-setup/setup.sh
+RUN /root/setup/UseLATEX-setup.sh
+RUN /root/setup/texlive-setup.sh
+RUN /root/setup/git-latexdiff-setup.sh
 
 WORKDIR /
 

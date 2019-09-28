@@ -1,6 +1,6 @@
 # Ref: https://www.tug.org/texlive/doc/install-tl.html
 
-selected_scheme scheme-medium
+selected_scheme scheme-small
 TEXDIR         /opt/texlive/texdir
 TEXMFLOCAL     /opt/texlive/texmf-local
 TEXMFSYSVAR    /opt/texlive/texdir/texmf-var

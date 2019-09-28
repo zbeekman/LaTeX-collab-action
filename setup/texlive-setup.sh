@@ -9,13 +9,13 @@ MIRROR_URL="$(wget -q -S -O /dev/null http://mirror.ctan.org/ 2>&1 | sed -ne 's/
 wget -nv "${MIRROR_URL}systems/texlive/tlnet/install-tl-unx.tar.gz"
 wget -nv "${MIRROR_URL}systems/texlive/tlnet/install-tl-unx.tar.gz.sha512"
 wget -nv "${MIRROR_URL}systems/texlive/tlnet/install-tl-unx.tar.gz.sha512.asc"
-gpg --import /root/texlive-setup/texlive_pgp_keys.asc
+gpg --import /root/setup/texlive_pgp_keys.asc
 gpg --verify ./install-tl-unx.tar.gz.sha512.asc
 sha512sum -c ./install-tl-unx.tar.gz.sha512
 mkdir -p /tmp/install-tl/installer
 tar --strip-components 1 -zxf /tmp/install-tl/install-tl-unx.tar.gz \
   -C /tmp/install-tl/installer
-/tmp/install-tl/installer/install-tl --profile=/root/texlive-setup/texlive.profile
+/tmp/install-tl/installer/install-tl --profile=/root/setup/texlive.profile
 
 echo "==> Install Packages"
 tlmgr update --self
@@ -24,12 +24,14 @@ tlmgr install \
   biber \
   biblatex \
   cleveref \
+  fontname \
   latexdiff \
   latexmk \
   latexpand \
   multirow \
   nag \
   nomencl \
+  siunitx \
   texliveonfly
 
 echo "==> Clean up"
@@ -40,5 +42,7 @@ rm -rf \
   /opt/texlive/texdir/texmf-dist/source \
   /opt/texlive/texdir/texmf-var/web2c/tlmgr.log \
   /root/.gnupg \
-  /root/texlive-setup
+  /root/setup/texlive-setup.sh \
+  /root/setup/texlive.profile \
+  /root/setup/texlive_pgp_keys.asc \
   /tmp/install-tl
